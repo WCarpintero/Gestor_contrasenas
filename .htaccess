@@ -1,0 +1,16 @@
+RewriteEngine on
+Options +FollowSymlinks
+RewriteBase /gestor_contrasenas/
+# Evitar afectar archivos reales
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#1. Reglas generales
+RewriteRule ^inicio$ index.php [NC,QSA,L]
+RewriteRule ^registro$ views/registro.php [NC,QSA,L]
+RewriteRule ^dashboard$ views/main.php [NC,QSA,L]
+
+#2. Reglas específicas 
+RewriteRule ^Gestor/(\w+)/?$ controllers/gestorController.php?case=$1 [NC,QSA,L]
+RewriteRule ^Usuarios/(\w+)/?$ controllers/usuariosController.php?case=$1 [NC,QSA,L]
+RewriteRule ^Login/(\w+)/?$ controllers/loginController.php?case=$1 [NC,QSA,L]
